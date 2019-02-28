@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+    pycoco:
+        build:
+          context: .
+        tty: true
+        volumes:
+            - ./app:/srv/app:rw

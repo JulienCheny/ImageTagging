@@ -1,0 +1,15 @@
+docker build . -t pycoco
+docker run pycoco
+
+docker-compose build
+docker-compose up -d
+docker-compose down
+
+docker-compose exec pycoco python3 cocoget.py
+
+docker-compose exec pycoco python3 networkxGenCoco.py -w whitelist.csv -g graph.gml
+
+docker-compose exec pycoco python3 selectImgs.py -g graph.gml -c car -f 10
+
+
+docker cp pycoco:/srv/app/test.png .
