@@ -1,0 +1,12 @@
+version: '2.3'
+
+services:
+    pycoco:
+        build:
+          context: .
+        runtime: nvidia
+        environment:
+            - NVIDIA_VISIBLE_DEVICES=all
+        tty: true
+        volumes:
+            - ./app:/srv/app:rw

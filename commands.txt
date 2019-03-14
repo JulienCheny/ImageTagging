@@ -1,0 +1,21 @@
+####### commands ##########
+
+## Scripts
+
+docker-compose exec pycoco python3 app/networkxGenCoco.py -w app/whitelist.csv -g app/graph.gml
+
+docker-compose exec pycoco python3 app/GenNetworksParams.py -c app/configs.conf
+
+## Yolo train
+
+docker-compose exec pycoco ./darknet/darknet detector train datas/person/person.data darknet/cfg/yolov3-tiny.cfg yolov3-tiny.conv.15
+
+## Yolo detect
+
+docker-compose exec pycoco ./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg
+
+
+####### print ##########
+
+docker-compose exec pycoco cat datas/person/person.part
+docker-compose exec pycoco cat datas/person/labels/val2014/COCO_val2014_000000290896.txt

@@ -44,6 +44,7 @@ class ImgsSelector(object):
         self.keepEdgeTabIds = self.getKeepedEdges(g, self.mean, sumTab, percentFilter, printInfos);
 
         self.keepEdgeTabNames = [g.node[str(x)]['name'] for x in self.keepEdgeTabIds];
+        return self.keepEdgeTabIds
 
 def main(argv):
     ### Récuperation des paramètres d'entrées
