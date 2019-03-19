@@ -8,7 +8,7 @@ docker-compose exec pycoco python3 app/GenNetworksParams.py -c app/configs.conf
 
 ## Yolo train
 
-docker-compose exec pycoco ./darknet/darknet detector train datas/person/person.data darknet/cfg/yolov3-tiny.cfg yolov3-tiny.conv.15
+docker-compose exec pycoco ./darknet/darknet detector train datas/person/person.data darknet/cfg/yolov3-tiny.cfg
 
 ## Yolo detect
 

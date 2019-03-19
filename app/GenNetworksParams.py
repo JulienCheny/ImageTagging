@@ -119,8 +119,7 @@ def main(argv):
 			partValFilePath,
 			config['Darknet']['defaultClassesNameFile'],
 			config['COCO']['backupDirectory'])
-
-		exit()
+		
 		#cfgFilePath, classesCount, trainFilePath, validFilePath,classesNamePath, backupPath
 
 if __name__ == "__main__":

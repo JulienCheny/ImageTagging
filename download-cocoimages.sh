@@ -18,6 +18,6 @@ function downloadAndMoveInDocker()
 }
 
 downloadAndMoveInDocker train2014
-downloadAndMoveInDocker train2017
+#downloadAndMoveInDocker train2017
 downloadAndMoveInDocker val2014
-downloadAndMoveInDocker val2017
+#downloadAndMoveInDocker val2017
