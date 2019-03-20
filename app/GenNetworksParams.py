@@ -1,21 +1,52 @@
+"""
+Ce programme défini une commande utilisant les classes RelationshipGraphGenerator, NodesSelector et YoloAnnotationFilesGenerator ainsi que la librairie networkx et pycocotools en python
+"""
+
 import os, sys, getopt
 from pycocotools.coco import COCO
 import pylab, math, csv, copy, configparser
 import networkx as nx
 
-from networkxGenCoco import GraphGenerator
-from selectImgs import ImgsSelector
-from genYoloParameters import ParamsGenerator
+from RelationshipGraphGenerator import RelationshipGraphGenerator
+from NodesSelector import NodesSelector
+from YoloAnnotationFilesGenerator import YoloAnnotationFilesGenerator
 
 config = configparser.ConfigParser()
 
+
+
 def createDir(path):
+	"""
+    Créer un dossier au chemin indiqué
+
+	:type path: String
+    :param path: chemin du dossier
+    """
 	os.makedirs(path, exist_ok = True)
 
-#def createCocoClassesNameFile(cocoClassesNameFileFormat, selectedClasses):
-	
-
 def createCfgCocoFile(cfgFilePath, classesCount, trainFilePath, validFilePath,classesNamePath, backupPath):
+	"""
+    Génère un fichier config yolo au chemin indiqué
+
+	:type cfgFilePath: String
+    :param cfgFilePath: chemin du fichier config
+
+    :type classesCount: String
+    :param classesCount: nombre de classes ( = noeuds = categories = objets)
+
+    :type trainFilePath: String
+    :param trainFilePath: chemin du metafichier des images d'apprentissages
+
+    :type validFilePath: String
+    :param validFilePath: chemin du metafichier des images de validations
+
+    :type classesNamePath: String
+    :param classesNamePath: chemin du fichier contenant le nom des classes
+
+    :type backupPath: String
+    :param backupPath: chemin du répertoire dans lequel enregistrer le résultat
+    """
+
 	cfgCocoFileContent = 'classes = {}\ntrain = {}\nvalid = {}\nnames = {}\nbackup = {}\neval = coco'
 
 
@@ -25,6 +56,16 @@ def createCfgCocoFile(cfgFilePath, classesCount, trainFilePath, validFilePath,cl
 
 
 def getWhitelistCsv(filename):
+	"""
+    Récupère la whiteliste du fichier csv
+
+    :type filename: String
+    :param filename: le chemin du fichier whitelist
+
+    :return: les noms d'objets contenu dans le fichier whitelist
+	:rtype: liste de strings
+    """
+
 		try:
 			with open(filename, newline='') as csvfile:
 				spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -34,6 +75,14 @@ def getWhitelistCsv(filename):
 			return []
 
 def main(argv):
+	"""
+    Génère les fichiers de cofiguration de tous les réseaux de neurones à apprendre
+
+    :type configfile: String
+    :param configfile: le chemin du fichier de configuration du projet
+    """
+
+
 	### Récuperation des paramètres d'entrées
 	configFile = 'configs.conf'
 	try:
@@ -65,7 +114,7 @@ def main(argv):
 
 
 	### Génération du graphe
-	graphGen = GraphGenerator(whitelistFile, annValFilesTab)
+	graphGen = RelationshipGraphGenerator(whitelistFile, annValFilesTab)
 
 	#graphGen.displayEdges()
 
@@ -73,16 +122,16 @@ def main(argv):
 
 
 	### Selection des images
-	sel = ImgsSelector()
+	sel = NodesSelector()
 
 	for catNm in catNms:
-		sel.selectImgs(config['Graph_generator_arguments']['graphFile'], catNm, float(config['Network_image_selector']['percentFilter']), False)
+		sel.selectNodes(config['Graph_generator_arguments']['graphFile'], catNm, float(config['Network_image_selector']['percentFilter']), False)
 		#print(sel.keepEdgeTabNames)
 
 
 
 		### generation des params
-		paramsGen = ParamsGenerator()
+		paramsGen = YoloAnnotationFilesGenerator()
 
 		labelsPath = config['COCO']['labelDirectory'].format(catNm)
 
