@@ -1,0 +1,7 @@
+GenNetworksParams module
+========================
+
+.. automodule:: GenNetworksParams
+    :members:
+    :undoc-members:
+    :show-inheritance:

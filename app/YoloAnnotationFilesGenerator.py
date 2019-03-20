@@ -5,19 +5,8 @@ Ce programme défini une classe YoloAnnotationFilesGenerator utilisant pycocotoo
 import sys, getopt, os
 from pycocotools.coco import COCO
 
-
-'''
-### Fichier json des annotations coco
-fileNameVal2014 = "val2014"
-fileNameTrain2014 = "train2014"
-
-annFilePath = ('../datas/annotations/instances_', '.json')
-
-imgFilePath = "/images/{}/COCO_{}_{}.jpg"
-labelFilePath = "/labels/{}/COCO_{}_{}.txt"
-### Initialisation du parseur coco  
-coco=COCO(fileNameVal2014.join(annFilePath))
-#coco17=COCO(annFile2017)'''
+#imports des tests
+import configparser
 
 class YoloAnnotationFilesGenerator:
 	"""
@@ -141,18 +130,26 @@ class YoloAnnotationFilesGenerator:
 
 
 def test():
-	try:
-		os.mkdir(os.getcwd() + "/labels")
-	except FileExistsError:
-		print("directory already exists")
+	config = configparser.ConfigParser()
+	configFile = 'test/configs.conf'
 
-	#sel = ImgsSelector()
-	#sel.selectImgs("graph.gml", "car", 10, False)
+	### recuperation des configurations
+	config.read(configFile)
 
-	usedImgsId = generateAnnotsYolofile(sel.keepEdgeTabIds, coco, fileNameVal2014)
+	catNm = "person"
+	
+	paramsGen = YoloAnnotationFilesGenerator()
 
-	writePartImgFile(fileNameVal2014, imgFilePath, usedImgsId)
+	labelsPath = config['COCO']['labelDirectory'].format(catNm)
 
-	'''b = (float(xmin), float(xmax), float(ymin), float(ymax))
-	bb = convert((w,h), b)
-	print(bb)'''
+	# train
+	partTrainFilePath = config['Yolo_arguments']['annFileFormat'].format(catNm, 'train')
+	if os.path.exists(partTrainFilePath):
+		os.remove(partTrainFilePath)
+
+	for datatype in config['COCO']['trainFiles'].split(','):
+		createDir(labelsPath + '/' + datatype)
+		absolutePathAnnFile = config['COCO']['annFileFormat'].format(datatype)
+		usedImgsId = paramsGen.generateAnnotsYolofile(COCO(absolutePathAnnFile), config['Yolo_arguments']['labelFileFormat'], sel.keepEdgeTabIds, labelsPath, datatype)
+
+		paramsGen.writePartImgFile(datatype, partTrainFilePath, config['COCO']['imagesDirectory'] + '/' + datatype + '/' + config['Yolo_arguments']['imageFileFormat'], usedImgsId)

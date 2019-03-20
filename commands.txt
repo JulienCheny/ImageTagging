@@ -2,7 +2,7 @@
 
 ## Scripts
 
-docker-compose exec pycoco python3 app/networkxGenCoco.py -w app/whitelist.csv -g app/graph.gml
+docker-compose exec pycoco python3 app/RelationshipGraphGenerator.py -w app/whitelist.csv -g app/graph.gml
 
 docker-compose exec pycoco python3 app/GenNetworksParams.py -c app/configs.conf
 
@@ -12,7 +12,7 @@ docker-compose exec pycoco ./darknet/darknet detector train datas/person/person.
 
 ## Yolo detect
 
-docker-compose exec pycoco ./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg
+docker-compose exec pycoco ./darknet/darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg
 
 
 ####### print ##########

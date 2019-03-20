@@ -1,0 +1,9 @@
+# Générateur de graphes
+
+docker-compose exec pycoco python3 app/RelationshipGraphGenerator.py -w app/whitelist_test.csv -g app/graph_test.gml
+
+
+# Génerateur de paramètres yolo
+
+docker-compose exec pycoco python3 app/GenNetworksParams.py -c app/test/configs_test.conf
+

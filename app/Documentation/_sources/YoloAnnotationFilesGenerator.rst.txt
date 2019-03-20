@@ -1,0 +1,7 @@
+YoloAnnotationFilesGenerator module
+===================================
+
+.. automodule:: YoloAnnotationFilesGenerator
+    :members:
+    :undoc-members:
+    :show-inheritance:

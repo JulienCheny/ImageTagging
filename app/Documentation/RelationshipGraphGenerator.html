@@ -1,0 +1,328 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>RelationshipGraphGenerator module &#8212; ImageTagging  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="YoloAnnotationFilesGenerator module" href="YoloAnnotationFilesGenerator.html" />
+    <link rel="prev" title="NodesSelector module" href="NodesSelector.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-RelationshipGraphGenerator">
+<span id="relationshipgraphgenerator-module"></span><h1>RelationshipGraphGenerator module<a class="headerlink" href="#module-RelationshipGraphGenerator" title="Permalink to this headline">¶</a></h1>
+<p>Ce programme défini une classe RelationshipGraphGenerator utilisant Networkx et pycocotools en python</p>
+<dl class="class">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator">
+<em class="property">class </em><code class="descclassname">RelationshipGraphGenerator.</code><code class="descname">RelationshipGraphGenerator</code><span class="sig-paren">(</span><em>whitelistFile</em>, <em>annotationsPaths</em><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Cette classe va générer un graphe de relations spatiales depuis des fichiers d’annotations d’images</p>
+<dl class="method">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator.displayEdges">
+<code class="descname">displayEdges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator.displayEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Affiche tous les arcs du graphe</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator.fillGraph">
+<code class="descname">fillGraph</code><span class="sig-paren">(</span><em>catWhiteIds</em>, <em>coco</em><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator.fillGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rempli le graphe avec les relations spatiales trouvés dans les annotations</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">type catWhiteIds:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Liste d’Entiers</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>catWhiteIds</strong> – Les id des objets whitelistés</li>
+<li><strong>coco</strong> (<em>objet Coco de la bibliothàque pycocotools</em>) – Parseur coco de fichier json contenant des annotations d’images</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator.getAngleBetween">
+<code class="descname">getAngleBetween</code><span class="sig-paren">(</span><em>pos1</em>, <em>pos2</em><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator.getAngleBetween" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calcul l’angle entre deux points</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">type pos1:</th><td class="field-body">Liste de décimales</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pos1</strong> – coordonnées du point 1</li>
+<li><strong>pos2</strong> (<em>Liste de décimales</em>) – coordonnées du point 2</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Valeur de l’angle entre les 2 points
+:rtype: Décimal</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator.getAngleName">
+<code class="descname">getAngleName</code><span class="sig-paren">(</span><em>angle</em><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator.getAngleName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Récupère le nom (orientation) d’un angle donné</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">type angle:</th><td class="field-body">Décimal</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>angle</strong> – Valeur d’un angle entre les 2 points</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Nom de l’angle
+:rtype: String</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator.getCenterOfSquare">
+<code class="descname">getCenterOfSquare</code><span class="sig-paren">(</span><em>bbox</em><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator.getCenterOfSquare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Récupère le centre d’un rectangle donné</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">type bbox:</th><td class="field-body">Liste de décimales</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bbox</strong> – coordonnées du rectangle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">coordonnées du point centre du rectangle
+:rtype: Liste de décimales</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator.getGraph">
+<code class="descname">getGraph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator.getGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Récupère le graphe</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">le graphe
+:rtype: objet DiGraph de la bibliothèque networkx</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator.getWhitelistCsv">
+<code class="descname">getWhitelistCsv</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator.getWhitelistCsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Récupère la whiteliste du fichier csv</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>String</em>) – le chemin du fichier whitelist</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">les noms d’objets contenu dans le fichier whitelist
+:rtype: liste de strings</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator.graphAddValue">
+<code class="descname">graphAddValue</code><span class="sig-paren">(</span><em>catIdX</em>, <em>catIdY</em>, <em>angleName</em><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator.graphAddValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ajoute une valeur au graphe. Ajoute un arc si il n’existe pas puis incrémente une valeur de l’arc</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">type catIdX:</th><td class="field-body">Entier</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>catIdX</strong> – id de la categorie / noeud X</li>
+<li><strong>catIdY</strong> (<em>Entier</em>) – id de la categorie / noeud Y</li>
+<li><strong>angleName</strong> (<em>String</em>) – nom de l’angle sur lequel la valeur a été incrémenté</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">l’histogramme des angles de l’arc
+:rtype: Objet</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RelationshipGraphGenerator.RelationshipGraphGenerator.saveGraph">
+<code class="descname">saveGraph</code><span class="sig-paren">(</span><em>graphfile</em><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.RelationshipGraphGenerator.saveGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sauvegarde le graphe dans un fichier</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>graphfile</strong> (<em>String</em>) – le chemin du fichier graphe (gml)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="RelationshipGraphGenerator.main">
+<code class="descclassname">RelationshipGraphGenerator.</code><code class="descname">main</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="headerlink" href="#RelationshipGraphGenerator.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ImageTagging</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GenNetworksParams.html">GenNetworksParams module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NodesSelector.html">NodesSelector module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RelationshipGraphGenerator module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="YoloAnnotationFilesGenerator.html">YoloAnnotationFilesGenerator module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="darknet.html">darknet module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="NodesSelector.html" title="previous chapter">NodesSelector module</a></li>
+      <li>Next: <a href="YoloAnnotationFilesGenerator.html" title="next chapter">YoloAnnotationFilesGenerator module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Julien Cheny.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/RelationshipGraphGenerator.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

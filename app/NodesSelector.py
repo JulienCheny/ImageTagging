@@ -108,6 +108,22 @@ class NodesSelector(object):
         self.keepEdgeTabNames = [g.node[str(x)]['name'] for x in self.keepEdgeTabIds];
         return self.keepEdgeTabIds
 
+
+def test():
+    ### Récuperation des paramètres d'entrées
+    graphinputfile = 'graph_test.gml'
+    categoryName = 'person'
+    percentFilter = 10
+
+    sel = NodesSelector()
+    sel.selectNodes(graphinputfile, categoryName, percentFilter, True)
+
+    print("Résultat :")
+    print("Moyenne des effectifs : " + sel.mean)
+    print("Id des objets séléctionnés : " + sel.keepEdgeTabIds)
+    print("Noms des objets séléctionnés : " + sel.keepEdgeTabNames)
+
+
 def main(argv):
     ### Récuperation des paramètres d'entrées
     graphinputfile = ''

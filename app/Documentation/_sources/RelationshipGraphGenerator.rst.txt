@@ -1,0 +1,7 @@
+RelationshipGraphGenerator module
+=================================
+
+.. automodule:: RelationshipGraphGenerator
+    :members:
+    :undoc-members:
+    :show-inheritance:

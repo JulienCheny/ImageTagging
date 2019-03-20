@@ -91,6 +91,7 @@ class RelationshipGraphGenerator:
         :type graphfile: String
         :param graphfile: le chemin du fichier graphe (gml)
         """
+
 		nx.write_gml(self.g, graphfile)
 
 	def getGraph(self):
@@ -100,6 +101,7 @@ class RelationshipGraphGenerator:
         :return: le graphe
 		:rtype: objet DiGraph de la bibliothèque networkx
         """
+
 		return self.g
 
 	def graphAddValue(self,catIdX,catIdY, angleName):
@@ -118,6 +120,7 @@ class RelationshipGraphGenerator:
         :return: l'histogramme des angles de l'arc
 		:rtype: Objet
         """
+
 		edgData = self.g.get_edge_data(catIdX, catIdY)
 		if edgData is None:
 			self.g.add_edge(catIdX,catIdY, object=copy.copy(self.emptyHisto))
@@ -135,6 +138,7 @@ class RelationshipGraphGenerator:
         :return: coordonnées du point centre du rectangle
 		:rtype: Liste de décimales
         """
+
 		return [bbox[0] + bbox[2] / 2.0, bbox[1] + bbox[3]/2.0];
 
 	def getAngleBetween(self, pos1, pos2):
@@ -150,6 +154,7 @@ class RelationshipGraphGenerator:
         :return: Valeur de l'angle entre les 2 points
 		:rtype: Décimal
         """
+
 		myradians = math.atan2(pos2[1]-pos1[1], pos2[0]-pos1[0])
 		mydegrees = math.degrees(myradians)
 		return round(mydegrees,1);
@@ -164,6 +169,7 @@ class RelationshipGraphGenerator:
         :return: Nom de l'angle
 		:rtype: String
         """
+        
 		angleName = 'up';
 		if angle < 45 and angle > - 45:
 			angleName = 'left'
@@ -217,27 +223,41 @@ class RelationshipGraphGenerator:
 							angleName = self.getAngleName(angle)
 							edg = self.graphAddValue(catId, catIdTarget, angleName)
 
+
+def test():
+	### Récuperation des paramètres d'entrées
+	graphOutputfile = 'graph_test.gml'
+	whitelistFilename = 'whitelist_test.csv'
+	annFile = '/srv/datas/annotations/instances_val2014.json'
+
+	gen = RelationshipGraphGenerator(whitelistFilename, [annFile])
+	gen.displayEdges()
+	gen.saveGraph(graphOutputfile)
+
+
 def main(argv):
 	### Récuperation des paramètres d'entrées
 	graphOutputfile = 'graphresult.gml'
 	whitelistFilename = 'whitelist.csv'
-	annFile = '/srv/datas/annotations/instances_val2014.json'
+	annFile = '/srv/datas/annotations/instances_train2014.json'
 	try:
-		opts, args = getopt.getopt(argv,"hw:g:",["wfile=","gfile="])
+		opts, args = getopt.getopt(argv,"hw:g:a:",["wfile=","gfile=","annfile="])
 	except getopt.GetoptError:
 		print('opt error')
-		print ('Command pattern : selectImgs.py -w <whitelistfile> -g <graphfile>')
+		print ('Command pattern : selectImgs.py -w <whitelistfile> -g <graphfile> -a <annfile>')
 		sys.exit(2)
 	for opt, arg in opts:
 		if opt == '-h':
-			print ('Command pattern : selectImgs.py -w <whitelistfile> -g <graphfile>')
+			print ('Command pattern : selectImgs.py -w <whitelistfile> -g <graphfile> -a <annfile>')
 			sys.exit()
 		elif opt in ("-w", "--wfile"):
 			whitelistFilename = arg
 		elif opt in ("-g", "--gfile"):
 			graphOutputfile = arg
+		elif opt in ("-a", "--annfile"):
+			annFile = arg
 
-	gen = GraphGenerator(whitelistFilename, [annFile])
+	gen = RelationshipGraphGenerator(whitelistFilename, [annFile])
 
 	gen.displayEdges()
 	gen.saveGraph(graphOutputfile)

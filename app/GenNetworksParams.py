@@ -22,6 +22,7 @@ def createDir(path):
 	:type path: String
     :param path: chemin du dossier
     """
+
 	os.makedirs(path, exist_ok = True)
 
 def createCfgCocoFile(cfgFilePath, classesCount, trainFilePath, validFilePath,classesNamePath, backupPath):
@@ -49,7 +50,6 @@ def createCfgCocoFile(cfgFilePath, classesCount, trainFilePath, validFilePath,cl
 
 	cfgCocoFileContent = 'classes = {}\ntrain = {}\nvalid = {}\nnames = {}\nbackup = {}\neval = coco'
 
-
 	cfgCocoFile = open(cfgFilePath,"w+")
 	cfgCocoFile.write(cfgCocoFileContent.format(classesCount, trainFilePath, validFilePath,classesNamePath, backupPath))
 	cfgCocoFile.close()
@@ -66,13 +66,13 @@ def getWhitelistCsv(filename):
 	:rtype: liste de strings
     """
 
-		try:
-			with open(filename, newline='') as csvfile:
-				spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-				return [ item for innerlist in spamreader for item in innerlist ]
-		except FileNotFoundError:
-			print("whitelist file no found")
-			return []
+	try:
+		with open(filename, newline='') as csvfile:
+			spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+			return [ item for innerlist in spamreader for item in innerlist ]
+	except FileNotFoundError:
+		print("whitelist file no found")
+		return []
 
 def main(argv):
 	"""
@@ -81,7 +81,6 @@ def main(argv):
     :type configfile: String
     :param configfile: le chemin du fichier de configuration du projet
     """
-
 
 	### Récuperation des paramètres d'entrées
 	configFile = 'configs.conf'
@@ -130,7 +129,7 @@ def main(argv):
 
 
 
-		### generation des params
+		### generation des parameteres
 		paramsGen = YoloAnnotationFilesGenerator()
 
 		labelsPath = config['COCO']['labelDirectory'].format(catNm)

@@ -1,0 +1,7 @@
+NodesSelector module
+====================
+
+.. automodule:: NodesSelector
+    :members:
+    :undoc-members:
+    :show-inheritance:
