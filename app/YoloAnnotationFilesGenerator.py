@@ -30,7 +30,7 @@ class YoloAnnotationFilesGenerator:
 
 		dw = 1./size[0]
 		dh = 1./size[1]
-		cx = box[0] + box[1]/2.0
+		cx = box[0] + box[2]/2.0
 		cy = box[1] + box[3]/2.0
 		cx = cx*dw
 		cy = cy*dh
@@ -100,7 +100,7 @@ class YoloAnnotationFilesGenerator:
 					#print(bbox)
 					yoloBbox = self.convert([img['width'], img['height']], bbox)
 					#print(val)
-					file.write(str(catId) + ' ' + ' '.join(str(e) for e in yoloBbox) + "\n")
+					file.write(str(catId-1) + ' ' + ' '.join(str(e) for e in yoloBbox) + "\n")
 			if file != None:
 				file.close()
 		return usedImgsId

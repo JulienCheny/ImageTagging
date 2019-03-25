@@ -111,17 +111,18 @@ class NodesSelector(object):
 
 def test():
     ### Récuperation des paramètres d'entrées
-    graphinputfile = 'graph_test.gml'
+    graphinputfile = '/srv/app/test/graph_test.gml'
     categoryName = 'person'
     percentFilter = 10
 
     sel = NodesSelector()
     sel.selectNodes(graphinputfile, categoryName, percentFilter, True)
 
-    print("Résultat :")
-    print("Moyenne des effectifs : " + sel.mean)
-    print("Id des objets séléctionnés : " + sel.keepEdgeTabIds)
-    print("Noms des objets séléctionnés : " + sel.keepEdgeTabNames)
+    print("Resultat :")
+    print("Id des objets selectionnes : ")
+    print(sel.keepEdgeTabIds)
+    print("Noms des objets selectionnes : ")
+    print(sel.keepEdgeTabNames)
 
 
 def main(argv):
@@ -146,8 +147,8 @@ def main(argv):
         elif opt in ("-f", "--pfilter"):
             percentFilter = int(arg)
 
-    sel = ImgsSelector()
-    sel.selectImgs(graphinputfile, categoryName, percentFilter, True)
+    sel = NodesSelector()
+    sel.selectNodes(graphinputfile, categoryName, percentFilter, True)
 
     print("result:")
     print(sel.mean)
@@ -155,4 +156,5 @@ def main(argv):
     print(sel.keepEdgeTabNames)
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+   #main(sys.argv[1:])
+   test()

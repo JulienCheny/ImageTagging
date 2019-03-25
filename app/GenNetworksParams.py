@@ -120,11 +120,13 @@ def main(argv):
 	graphGen.saveGraph(config['Graph_generator_arguments']['graphFile'])
 
 
+	#input("Press Enter to continue...")
+
 	### Selection des images
 	sel = NodesSelector()
 
 	for catNm in catNms:
-		sel.selectNodes(config['Graph_generator_arguments']['graphFile'], catNm, float(config['Network_image_selector']['percentFilter']), False)
+		sel.selectNodes(config['Graph_generator_arguments']['graphFile'], catNm, float(config['Network_image_selector']['percentFilter']), True)
 		#print(sel.keepEdgeTabNames)
 
 

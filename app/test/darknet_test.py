@@ -148,8 +148,8 @@ if __name__ == "__main__":
     #meta = load_meta("cfg/imagenet1k.data")
     #r = classify(net, meta, im)
     #print r[:10]
-    net = load_net(bytes("/srv/darknet/cfg/yolov3-tiny.cfg", encoding='utf-8'),bytes("/srv/datas/test/backup/yolov3-tiny_test_final.weights", encoding='utf-8'), 0)
-    meta = load_meta(bytes("/srv/app/coco.data", encoding='utf-8'))
+    net = load_net(bytes("/srv/app/test/yolov3-tiny_detect_test.cfg", encoding='utf-8'),bytes("/srv/datas/test/backup/yolov3-tiny_test_10000.weights", encoding='utf-8'), 0)
+    meta = load_meta(bytes("/srv/datas/test/person/person.data", encoding='utf-8'))
     r = detect(net, meta, bytes("/srv/app/test/image_test.png", encoding='utf-8'))
     print("Detection result :")
     [print(el) for el in r]

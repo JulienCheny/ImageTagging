@@ -8,12 +8,27 @@ docker-compose exec pycoco python3 app/GenNetworksParams.py -c app/configs.conf
 
 ## Yolo train
 
-docker-compose exec pycoco ./darknet/darknet detector train datas/person/person.data darknet/cfg/yolov3-tiny.cfg
+docker-compose exec pycoco ./darknet/darknet detector train datas/test/person/person.data app/test/yolov3-tiny_test.cfg
+
+docker-compose exec pycoco ./darknet/darknet detector train datas/person/person.data app/test/yolov3-tiny_test.cfg
 
 ## Yolo detect
 
-docker-compose exec pycoco ./darknet/darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg
+docker-compose exec pycoco ./darknet/darknet detect darknet/cfg/yolov3-tiny.cfg darknet/yolov3-tiny.weights darknet/data/dog.jpg
 
+docker-compose exec pycoco python3 app/darknet.py
+
+##### commandes dans le container #####
+
+# Weights infos
+
+./darknet yolo recall cfg/yolov3-tiny.cfg /srv/datas/backup/yolov3-tiny_final.weights
+
+# detect
+
+./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg
+
+# 
 
 ####### print ##########
 

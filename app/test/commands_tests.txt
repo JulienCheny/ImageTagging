@@ -7,3 +7,8 @@ docker-compose exec pycoco python3 app/RelationshipGraphGenerator.py -w app/whit
 
 docker-compose exec pycoco python3 app/GenNetworksParams.py -c app/test/configs_test.conf
 
+# Detection yolo
+
+docker-compose exec pycoco ls datas/test/backup
+
+docker-compose exec pycoco python3 app/test/darknet_test.py
