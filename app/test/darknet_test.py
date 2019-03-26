@@ -148,10 +148,20 @@ if __name__ == "__main__":
     #meta = load_meta("cfg/imagenet1k.data")
     #r = classify(net, meta, im)
     #print r[:10]
-    net = load_net(bytes("/srv/app/test/yolov3-tiny_detect_test.cfg", encoding='utf-8'),bytes("/srv/datas/test/backup/yolov3-tiny_test_10000.weights", encoding='utf-8'), 0)
-    meta = load_meta(bytes("/srv/datas/test/person/person.data", encoding='utf-8'))
-    r = detect(net, meta, bytes("/srv/app/test/image_test.png", encoding='utf-8'))
-    print("Detection result :")
+    
+    net_person = load_net(bytes("/srv/app/test/yolov3-tiny_detect_test.cfg", encoding='utf-8'),bytes("/srv/datas/test/backup/yolov3-tiny_test_20000.weights", encoding='utf-8'), 0)
+    meta_person = load_meta(bytes("/srv/datas/test/person/person.data", encoding='utf-8'))
+
+
+    net = load_net(bytes("/srv/darknet/cfg/yolov3-tiny.cfg", encoding='utf-8'),bytes("/srv/darknet/yolov3-tiny.weights", encoding='utf-8'), 0)
+    meta = load_meta(bytes("/srv/darknet/cfg/coco.data", encoding='utf-8'))
+
+
+    r = detect(net, meta, bytes("/srv/app/test/image_test.png", encoding='utf-8'), thresh = .2)
+    print("80 classes network detection result :")
     [print(el) for el in r]
     
 
+    r = detect(net_person, meta_person, bytes("/srv/app/test/image_test.png", encoding='utf-8'), thresh = .2)
+    print("Person network detection result :")
+    [print(el) for el in r]
